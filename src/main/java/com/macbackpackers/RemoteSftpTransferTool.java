@@ -38,7 +38,6 @@ public class RemoteSftpTransferTool {
             FileObject localFile = sysManager.resolveFile(fileToTransfer.getAbsolutePath());
             String connectionString = props.getConnectionString();
             connectionString += (connectionString.endsWith("/") ? "" : "/") + fileToTransfer.getName();
-            LOGGER.info("Attempting to connect using connection string: " + connectionString);
             FileObject remoteFile = sysManager.resolveFile(
                     connectionString, createFileSystemOptions());
 
