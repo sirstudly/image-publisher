@@ -6,9 +6,12 @@ import org.springframework.stereotype.Component;
 
 import javax.imageio.ImageIO;
 import java.awt.AlphaComposite;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Transparency;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -57,6 +60,20 @@ public class WatermarkTool {
 
         // paints the image watermark
         g2d.drawImage(watermarkImage, topLeftX, topLeftY, null);
+
+        if ("bottom".equals(props.getShowTimestamp())) {
+            g2d.setFont(new Font(props.getTimestampFont(), Font.BOLD, 12));
+            FontMetrics fontMetrics = g2d.getFontMetrics();
+            String text = props.getCurrentTimestamp();
+            Rectangle2D rect = fontMetrics.getStringBounds(text, g2d);
+
+            // calculates the coordinate where the String is painted
+            int centerX = (sourceImage.getWidth() - (int) rect.getWidth()) / 2;
+            int centerY = sourceImage.getHeight() - (int) rect.getHeight();
+
+            // paints the textual watermark
+            g2d.drawString(text, centerX, centerY);
+        }
 
         File destinationFile = new File(props.getDestinationFilename());
         ImageIO.write(sourceImage, props.getDestinationFormat(), destinationFile);

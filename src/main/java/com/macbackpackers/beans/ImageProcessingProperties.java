@@ -29,6 +29,9 @@ public class ImageProcessingProperties {
     private int thumbnailTargetSize = 100;
     private int pixelsFromLeftEdge = 0;
     private int pixelsFromBottomEdge = 0;
+    private String showTimestamp = "bottom"; // only support bottom at the moment
+    private String timestampFont = "Arial";
+    private Date currentDate = new Date();
 
     public String getWatermarkFile() {
         return watermarkFile;
@@ -126,6 +129,26 @@ public class ImageProcessingProperties {
         this.thumbnailTargetSize = thumbnailTargetSize;
     }
 
+    public String getShowTimestamp() {
+        return showTimestamp;
+    }
+
+    public void setShowTimestamp(String showTimestamp) {
+        this.showTimestamp = showTimestamp;
+    }
+
+    public String getCurrentTimestamp() {
+        return new SimpleDateFormat("yyyy/MM/dd HH:mm:ss EEE").format(currentDate);
+    }
+
+    public String getTimestampFont() {
+        return timestampFont;
+    }
+
+    public void setTimestampFont(String timestampFont) {
+        this.timestampFont = timestampFont;
+    }
+
     /**
      * Returns the filename of the generated image with the current date time prefixed.
      * @return non-null filename
@@ -133,7 +156,7 @@ public class ImageProcessingProperties {
     public String getDestinationFilename() {
         return getDestinationFolder() + "/"
                 + getDestinationFilePrefix() + "_"
-                + new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date())
+                + new SimpleDateFormat("yyyyMMdd_HHmmss").format(currentDate)
                 + "." + getDestinationFormat();
     }
 
