@@ -95,6 +95,6 @@ public class SftpTransferProperties {
     }
 
     public String getConnectionString() {
-        return "sftp://" + getUser() + (StringUtils.isBlank(getPassword()) ? "" : "" + password) + "@" + getHost() + getDestinationFolder();
+        return "sftp://" + getUser() + (StringUtils.isBlank(getPassword()) ? "" : ":" + password) + "@" + getHost() + getDestinationFolder();
     }
 }
