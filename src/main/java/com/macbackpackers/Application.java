@@ -41,8 +41,12 @@ public class Application {
 
             // transfer the watermarked file over to the remote server
             RemoteSftpTransferTool transferTool = ctx.getBean(RemoteSftpTransferTool.class);
-            transferTool.copyFile(watermarkTool.saveImageWithWatermark());
+            File watermarkedImage = watermarkTool.saveImageWithWatermark();
+            transferTool.copyFile(watermarkedImage);
             transferTool.copyFile(watermarkTool.saveImageThumbnail());
+
+            // run remote command on the image file we just created
+            transferTool.runRemoteCommand(watermarkedImage);
 
             ((ConfigurableApplicationContext) ctx).close();
         };

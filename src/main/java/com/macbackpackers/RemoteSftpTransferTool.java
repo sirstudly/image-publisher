@@ -64,6 +64,16 @@ public class RemoteSftpTransferTool {
         return options;
     }
 
+    /**
+     * Executes the remote command on the given input file.
+     * @param inputFile the image file that we just uploaded
+     * @throws JSchException
+     * @throws IOException
+     */
+    public void runRemoteCommand(File inputFile) throws JSchException, IOException {
+        runRemoteCommand(String.format(props.getRemoteCommand(), inputFile.getName()));
+    }
+
     public void runRemoteCommand(String command) throws JSchException, IOException {
         Session jschSession = null;
 
