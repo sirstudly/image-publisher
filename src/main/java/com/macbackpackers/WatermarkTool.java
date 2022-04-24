@@ -62,7 +62,7 @@ public class WatermarkTool {
         g2d.drawImage(watermarkImage, topLeftX, topLeftY, null);
 
         if ("bottom".equals(props.getShowTimestamp())) {
-            g2d.setFont(new Font(props.getTimestampFont(), Font.BOLD, 12));
+            g2d.setFont(new Font(props.getTimestampFont(), Font.BOLD, props.getTimestampFontSize()));
             FontMetrics fontMetrics = g2d.getFontMetrics();
             String text = props.getCurrentTimestamp();
             Rectangle2D rect = fontMetrics.getStringBounds(text, g2d);

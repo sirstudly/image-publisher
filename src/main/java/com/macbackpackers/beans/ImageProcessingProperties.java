@@ -31,6 +31,7 @@ public class ImageProcessingProperties {
     private int pixelsFromBottomEdge = 0;
     private String showTimestamp = "bottom"; // only support bottom at the moment
     private String timestampFont = "Arial";
+    private int timestampFontSize = 12;
     private Date currentDate = new Date();
 
     public String getWatermarkFile() {
@@ -147,6 +148,14 @@ public class ImageProcessingProperties {
 
     public void setTimestampFont(String timestampFont) {
         this.timestampFont = timestampFont;
+    }
+
+    public int getTimestampFontSize() {
+        return timestampFontSize;
+    }
+
+    public void setTimestampFontSize(int timestampFontSize) {
+        this.timestampFontSize = timestampFontSize;
     }
 
     /**
