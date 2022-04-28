@@ -33,19 +33,21 @@ public class RemoteSftpTransferTool {
     }
 
     public void copyFile(File fileToTransfer) throws FileSystemException {
-        try(StandardFileSystemManager sysManager = new StandardFileSystemManager()) {
-            sysManager.init();
-            FileObject localFile = sysManager.resolveFile(fileToTransfer.getAbsolutePath());
-            String connectionString = props.getConnectionString();
-            connectionString += (connectionString.endsWith("/") ? "" : "/") + fileToTransfer.getName();
-            FileObject remoteFile = sysManager.resolveFile(
-                    connectionString, createFileSystemOptions());
+        if (fileToTransfer != null) {
+            try (StandardFileSystemManager sysManager = new StandardFileSystemManager()) {
+                sysManager.init();
+                FileObject localFile = sysManager.resolveFile(fileToTransfer.getAbsolutePath());
+                String connectionString = props.getConnectionString();
+                connectionString += (connectionString.endsWith("/") ? "" : "/") + fileToTransfer.getName();
+                FileObject remoteFile = sysManager.resolveFile(
+                        connectionString, createFileSystemOptions());
 
-            //Selectors.SELECT_FILES --> A FileSelector that selects only the base file/folder.
-            remoteFile.copyFrom(localFile, Selectors.SELECT_FILES);
+                //Selectors.SELECT_FILES --> A FileSelector that selects only the base file/folder.
+                remoteFile.copyFrom(localFile, Selectors.SELECT_FILES);
+            }
+            // The following is a normal response when closing the connection and can be safely ignored
+            // SftpClientFactory:84 - Caught an exception, leaving main loop due to Socket closed
         }
-        // The following is a normal response when closing the connection and can be safely ignored
-        // SftpClientFactory:84 - Caught an exception, leaving main loop due to Socket closed
     }
 
     private FileSystemOptions createFileSystemOptions() throws FileSystemException {
