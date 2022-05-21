@@ -33,6 +33,7 @@ public class ImageProcessingProperties {
     private String timestampFont = "Arial";
     private int timestampFontSize = 12;
     private Date currentDate = new Date();
+    private Integer numberOfDaysToKeepFiles = null;
 
     public String getWatermarkFile() {
         return watermarkFile;
@@ -156,6 +157,14 @@ public class ImageProcessingProperties {
 
     public void setTimestampFontSize(int timestampFontSize) {
         this.timestampFontSize = timestampFontSize;
+    }
+
+    public Integer getNumberOfDaysToKeepFiles() {
+        return numberOfDaysToKeepFiles;
+    }
+
+    public void setNumberOfDaysToKeepFiles(Integer numberOfDaysToKeepFiles) {
+        this.numberOfDaysToKeepFiles = numberOfDaysToKeepFiles;
     }
 
     /**

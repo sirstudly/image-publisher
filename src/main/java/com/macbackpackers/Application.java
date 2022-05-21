@@ -48,6 +48,8 @@ public class Application {
             // run remote command on the image file we just created
             transferTool.runRemoteCommand(watermarkedImage);
 
+            ctx.getBean(FileService.class).deleteOldFiles();
+
             ((ConfigurableApplicationContext) ctx).close();
         };
     }
